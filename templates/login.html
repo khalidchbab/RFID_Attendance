@@ -1,6 +1,16 @@
-{% extends "layout.html" %}
+{% extends "layoutl.html" %}
 {% block content %}
-<h1>Login</h1>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <!-- Do something with the message -->
+            {{ message }}
+
+        {% endfor %}
+    {% endif %}
+	{% endwith %}
+
+<h1>S'identifier</h1>
   <form action="" method="POST">
     <div class="form-group">
       <label>Username</label>

@@ -1,5 +1,15 @@
-{% extends "layout.html" %}
+{% extends "layoutl.html" %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <!-- Do something with the message -->
+            {{ message }}
+
+        {% endfor %}
+    {% endif %}
+	{% endwith %}
+
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}

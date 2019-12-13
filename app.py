@@ -21,7 +21,10 @@ def is_logged_in(f):
             return redirect(url_for('login'))
     return wrap
 
-
+@app.route('/')
+@is_logged_in
+def home():
+    return render_template('home.html', attendance=data)
 
 @app.route('/presence')
 @is_logged_in
@@ -65,7 +68,7 @@ def logout():
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         # Get Form Fields
