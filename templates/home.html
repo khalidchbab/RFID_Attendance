@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static',filename='addform.css')}}">
+<script type=text/javascript>
+    $(function() {
+      $('a#test').bind('click', function() {
+        $.getJSON('/getRfid',
+            function(data) {
+            $('input#RFID').val(data["RFID"]);
+            $('input#RFID2').val(data["RFID"]);
+        });
+      });
+    });
+</script>  
+
+{% endblock %}
+{% block content %}
+    <div class='container'>
+		<h1>dhzdhsqhdsh</h1>
+        <div class="col-md-8">
+			<form>
+			<div id="contact-form" class="form-container" data-form-container>
+			<div class="row">
+				<div class="form-title">
+					<span>Ajouter Etudiant</span>
+				</div>
+			</div>
+			<div class="input-container">
+				<div class="row">
+					<span class="req-input" >
+						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Input Your First and Last Name."> </span>
+						<input type="text" data-min-length="8" placeholder="Nom">
+					</span>
+                </div>
+                <div class="row">
+					<span class="req-input" >
+						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Input Your CNE."> </span>
+						<input type="text" data-min-length="8" placeholder="CNE">
+					</span>
+				</div>
+				<div class="row">
+					<span class="req-input">
+						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Please Input Your Phone Number."> </span>
+						<input id="RFID2" type="tel" placeholder="RFID">
+					</span>
+				</div>
+				<div class="row">
+					<span class="req-input message-box">
+						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Please Include a Message."> </span>
+						<textarea type="textarea" data-min-length="10" placeholder="Message"></textarea>
+                </div>
+                <div class="row submit-row">
+					<a href=# id=test><button type="button" class="btn btn-block submit-form">Scanner RFID</button></a>
+				</div>
+				<div class="row submit-row">
+					<button type="button" class="btn btn-block submit-form">Submit</button>
+				</div>
+			</div>
+			</div>
+			</form>
+		</div>
+    </div>
+    
+{% endblock %}
