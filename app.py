@@ -24,7 +24,7 @@ def is_logged_in(f):
 @app.route('/')
 @is_logged_in
 def home():
-    return render_template('home.html', attendance=data)
+    return render_template('home.html')
 
 @app.route('/presence')
 @is_logged_in
