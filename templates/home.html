@@ -12,53 +12,95 @@
       });
     });
 </script>  
-
+<style type="text/css">
+	.tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;}
+	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
+	.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#039;background-color:#b9c9fe;}
+	.tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}
+	.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+	</style>
 {% endblock %}
 {% block content %}
-    <div class='container'>
-		<h1>dhzdhsqhdsh</h1>
-        <div class="col-md-8">
-			<form>
-			<div id="contact-form" class="form-container" data-form-container>
-			<div class="row">
-				<div class="form-title">
-					<span>Ajouter Etudiant</span>
-				</div>
+<div class="content-section">
+	{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <!-- Do something with the message -->
+            {{ message }}
+
+        {% endfor %}
+    {% endif %}
+	{% endwith %}
+
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">Ajouter Etudiant</legend>
+			<div class="form-group">
+				{{ form.nom.label(class="form-control-label") }}
+				{% if form.nom.errors %}
+					{{ form.nom(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.nom.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.nom(class="form-control form-control-lg") }}
+				{% endif %}
 			</div>
-			<div class="input-container">
-				<div class="row">
-					<span class="req-input" >
-						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Input Your First and Last Name."> </span>
-						<input type="text" data-min-length="8" placeholder="Nom">
-					</span>
-                </div>
-                <div class="row">
-					<span class="req-input" >
-						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Input Your CNE."> </span>
-						<input type="text" data-min-length="8" placeholder="CNE">
-					</span>
-				</div>
-				<div class="row">
-					<span class="req-input">
-						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Please Input Your Phone Number."> </span>
-						<input id="RFID2" type="tel" placeholder="RFID">
-					</span>
-				</div>
-				<div class="row">
-					<span class="req-input message-box">
-						<span class="input-status" data-toggle="tooltip" data-placement="top" title="Please Include a Message."> </span>
-						<textarea type="textarea" data-min-length="10" placeholder="Message"></textarea>
-                </div>
-                <div class="row submit-row">
-					<a href=# id=test><button type="button" class="btn btn-block submit-form">Scanner RFID</button></a>
-				</div>
-				<div class="row submit-row">
-					<button type="button" class="btn btn-block submit-form">Submit</button>
-				</div>
+			<div class="form-group">
+				{{ form.rfid.label(class="form-control-label") }}
+				{% if form.rfid.errors %}
+					{{ form.rfid(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.rfid.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.rfid(class="form-control form-control-lg") }}
+				{% endif %}
 			</div>
+			<div class="form-group">
+				{{ form.cne.label(class="form-control-label") }}
+				{% if form.cne.errors %}
+					{{ form.cne(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.cne.errors %}
+							<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ form.cne(class="form-control form-control-lg") }}
+				{% endif %}
 			</div>
-			</form>
+		</fieldset>
+		<div class="form-group">
+			{{ form.submit(class="btn btn-outline-info") }}
+			<a href=# id=test><button type="button" class="btn btn-outline-info">Scanner RFID</button></a>
 		</div>
-    </div>
-    
+	</form>
+</div>
+<div class="border-top pt-3">
+</div>
+<div>
+	<table class="tg">
+		<tr>
+		  <th class="tg-lboi">Student ID</th>
+		  <th class="tg-lboi">Nom</th>
+		  <th class="tg-lboi">CNE</th>
+		  <th class="tg-lboi">RFID</th>
+		</tr>	
+		{% for row in data %}
+		<tr>
+		  <td class="tg-lboi">{{row.0}}</td>
+		  <td class="tg-lboi">{{row.1}}</td>
+		  <td class="tg-lboi">{{row.2}}</td>
+		  <td class="tg-lboi">{{row.3}}</td>
+		</tr>
+	
+	  {% endfor  %}
+	  </table>
+</div>
 {% endblock %}
